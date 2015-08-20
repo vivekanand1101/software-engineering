@@ -1,16 +1,23 @@
+package connect_java_with_mysql;
+
+/**
+ *
+ * @author vivek
+ */
 import java.sql.*;
 import java.util.*;
 import java.io.*;
 
-public class connect_java_with_mysql {
+public class Connect_java_with_mysql {
     public static void main (String args[])
     {
 
     try {
-        InputStream fileInput = new FileInputStream("config.properties");
-        Properties properties = new Properties();
-        properties.load(fileInput);
-        fileInput.close();
+        Properties properties;
+        try (InputStream fileInput = new FileInputStream("config.properties")) {
+            properties = new Properties();
+            properties.load(fileInput);
+        }
 
         String url = properties.getProperty("url");
         String dbname = properties.getProperty("database");
@@ -24,7 +31,7 @@ public class connect_java_with_mysql {
         // String roll_nos[] = new String[100];
 
             Class.forName(driver).newInstance();
-            Connection conn = DriverManager.getConnection(url+dbname, username, passwd);
+        try (Connection conn = DriverManager.getConnection(url+dbname, username, passwd)) {
             PreparedStatement st = conn.prepareStatement("SELECT roll_no FROM  test2 WHERE first_name = ?");
             st.setString(1, name);
             ResultSet res = st.executeQuery();
@@ -41,10 +48,8 @@ public class connect_java_with_mysql {
                 }
 
             }
-
-            conn.close();
-         } catch (Exception e) {
-                e.printStackTrace();
+        }
+         } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
          }
 
 
