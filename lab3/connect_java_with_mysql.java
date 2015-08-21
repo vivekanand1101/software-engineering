@@ -1,4 +1,4 @@
-package connect_java_with_mysql;
+// This code is wrong. Refer lab test 1 for java with databases
 
 /**
  *
@@ -8,29 +8,22 @@ import java.sql.*;
 import java.util.*;
 import java.io.*;
 
-public class Connect_java_with_mysql {
+public class connect_java_with_mysql {
     public static void main (String args[])
     {
 
     try {
-<<<<<<< HEAD
-        InputStream fileInput = new FileInputStream("config.properties");
-        Properties properties = new Properties();
-        properties.load(fileInput);
-=======
         Properties properties;
         try (InputStream fileInput = new FileInputStream("config.properties")) {
             properties = new Properties();
             properties.load(fileInput);
         }
->>>>>>> d544c5646b296ebd00194eba91c92cb7d10a5f22
 
         String url = properties.getProperty("url");
         String dbname = properties.getProperty("database");
         String username = properties.getProperty("dbusername");
         String passwd = properties.getProperty("dbpassword");
         String driver = properties.getProperty("driver");
-        fileInput.close();
 
         System.out.println("Enter the name to be queried");
         Scanner input = new Scanner(System.in);
