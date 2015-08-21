@@ -10,13 +10,13 @@ public class connect_java_with_mysql {
         InputStream fileInput = new FileInputStream("config.properties");
         Properties properties = new Properties();
         properties.load(fileInput);
-        fileInput.close();
 
         String url = properties.getProperty("url");
         String dbname = properties.getProperty("database");
         String username = properties.getProperty("dbusername");
         String passwd = properties.getProperty("dbpassword");
         String driver = properties.getProperty("driver");
+        fileInput.close();
 
         System.out.println("Enter the name to be queried");
         Scanner input = new Scanner(System.in);
